@@ -20,7 +20,7 @@ public boolean Login(String login, String pass) {
 	System.out.println();
 		try{
 			try{
-				//add comment to commit
+				
 			statement = Connect.connexionBD().createStatement();
 			Connect.connexionBD();			
 			String sql = "SELECT password FROM user WHERE login ='"+login+"'";
