@@ -10,46 +10,49 @@ import scp.log.model.User;
 public class SetUser {
 
 
-	Connection conn;
-	Statement statement = null;
-	ResultSet resultat;
-	User user=new User();
+    Connection conn;
+    private Statement statement = null;
+    private ResultSet resultat;
+    User user = new User();
+
+    /**
+     * Classe de sauvegarde de l'utilisateur
+     * @param login nom d'utilisateur
+     */
+    public void setUser(String login) {
 
 
-	public void setUser(String login){
+        try {
+
+            statement = Connect.connexionBD().createStatement();
+            Connect.connexionBD();
+            String query = "SELECT * FROM user WHERE login ='" + login + "';";
+            ResultSet result = statement.executeQuery(query);
+            result.first();
+            String nom;
+            String prenom;
+            int company;
+            int statut;
 
 
-		try{
+            nom = result.getString("nom");
+            user.setnom(nom);
 
-	statement = Connect.connexionBD().createStatement();
-	Connect.connexionBD();
-    String query = "SELECT * FROM user WHERE login ='"+login+"';";
-    ResultSet result = statement.executeQuery(query);
-    result.first();
-    String nom ="";
-    String prenom ="";
-    int company;
-    int statut;
+            prenom = result.getString("prenom");
+            user.setprenom(prenom);
 
+            company = result.getInt("societe");
+            user.setcompany(company);
 
-    nom = result.getString("nom");
-    user.setnom(nom);
+            statut = result.getInt("statut");
+            user.setstatus(statut);
 
-     prenom = result.getString("prenom");
-     user.setprenom(prenom);
+            result.close();
+            statement.close();
+        } catch (SQLException e4) {
+            System.out.println(e4.getMessage());
 
-     company = result.getInt("societe");
-     user.setcompany(company);
+        }
 
-     statut = result.getInt("statut");
-     user.setstatus(statut);
-
-      result.close();
-      statement.close();
-		}catch(SQLException e4){
-		System.out.println(e4.getMessage());
-
-	}
-
-	}
+    }
 }

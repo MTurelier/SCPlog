@@ -15,51 +15,71 @@ import scp.log.util.SetUser;
 
 public class LoginController {
 
-	public String login=new String();
-	public String pass=new String();
+    private String login = new String();
+    private String pass = new String();
 
-	@FXML
-	public  TextField Unamefield;
-	@FXML
-	public PasswordField Pwordfield;
-	private Stage loginStage;
-	private boolean okClicked = false;
-	private MainApp mainApp;
-	@FXML
-	public Button ok;
+    @FXML
+    public TextField Unamefield;
+    @FXML
+    public PasswordField Pwordfield;
+    private Stage loginStage;
+    private boolean okClicked = false;
+    private MainApp mainApp;
+    @FXML
+    public Button ok;
 
-	@FXML
-	private void initialize(){
+    /**
+     * Initialisation Login
+     */
+    @FXML
+    private void initialize() {
 
-	}
+    }
 
-	public void setloginStage (Stage loginStage){
-		this.loginStage = loginStage;
-	}
+    /**
+     *
+     * @param loginStage - Fenetre de Login
+     */
+    public void setloginStage(Stage loginStage) {
+        this.loginStage = loginStage;
+    }
 
+    /**
+     *
+     * @return OkClicked (appelé par la suite)
+     */
     public boolean isOkClicked() {
         return okClicked;
     }
 
-    public void setMainApp(MainApp mainApp){
-    	this.mainApp = mainApp;
+    /**
+     *
+     * @param mainApp Appelle Classe MainApp
+     */
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
     }
 
-
+    /**
+     * Sortie de la fenêtre
+     */
     @FXML
     private void handleCancel() {
-    	System.exit(0);
+        System.exit(0);
 
     }
 
+    /**
+     * Gestion du boutton New
+     */
     @FXML
-    private void handleNew(){
-    	login = Unamefield.getText();
-    	pass = Pwordfield.getText();
-    	Login log = new Login();
-    	if (log.Login(login, pass) == true){
-    	boolean okClicked = mainApp.showNUser();
-    	}    	else{
+    private void handleNew() {
+        login = Unamefield.getText();
+        pass = Pwordfield.getText();
+        Login log = new Login();
+        if (log.Login(login, pass)) {
+            boolean okClicked = mainApp.showNUser();
+        } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(loginStage);
             alert.setHeaderText("Please correct invalid fields");
@@ -68,27 +88,29 @@ public class LoginController {
 
             alert.showAndWait();
 
-    	}
+        }
     }
 
+    /**
+     * Gestion du bouton Ok
+     */
     @FXML
     private void handleOk() {
-    	login = Unamefield.getText();
-    	pass = Pwordfield.getText();
-    	Login log = new Login();
-    	SetUser setUser = new SetUser();
-    	if (log.Login(login, pass) == true){
-    		
-    	setUser.setUser(login);	
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.initOwner(loginStage);
-        alert.setTitle("Login OK");
-        alert.setContentText("Login OK");
-        
+        login = Unamefield.getText();
+        pass = Pwordfield.getText();
+        Login log = new Login();
+        SetUser setUser = new SetUser();
+        if (log.Login(login, pass) == true) {
 
-        alert.showAndWait();
-    	}
-    	else{
+            setUser.setUser(login);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.initOwner(loginStage);
+            alert.setTitle("Login OK");
+            alert.setContentText("Login OK");
+
+
+            alert.showAndWait();
+        } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(loginStage);
             alert.setHeaderText("Please correct invalid fields");
@@ -97,6 +119,6 @@ public class LoginController {
 
             alert.showAndWait();
 
-    	}
+        }
     }
 }

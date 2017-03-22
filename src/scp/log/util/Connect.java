@@ -4,55 +4,64 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Connect {
-	//Classe de connection
-	private static Connection conn;
-	private  Connect(){
+    /**
+     * Connection BDD
+     */
+    private static Connection conn;
 
-	//URL de connexion
-		if (conn ==null){
-    try {
-     Class.forName("com.mysql.jdbc.Driver").newInstance();
-    }catch (Exception e){
-    	 System.out.println("erreur de chargement de la BDD");
-    	 e.getMessage();
-    	 System.exit(0);
-     }
-	//Connection MySQL
+    /**
+     * Classe de connection base de données
+     */
+    private Connect() {
 
-    try{
-      String url = "jdbc:mysql://localhost/SCP";
-      String user = "root";
-      String passwd = "root";
+        //URL de connexion
+        if (conn == null) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+            } catch (Exception e) {
+                System.out.println("erreur de chargement de la BDD");
+                e.getMessage();
+                System.exit(0);
+            }
+            //Connection MySQL
 
-      conn = (Connection) DriverManager.getConnection(url, user, passwd);
-      System.out.println("Connexion effective !");
+            try {
+                String url = "jdbc:mysql://localhost/SCP";
+                String user = "root";
+                String passwd = "root";
 
-
-    } catch (Exception e) {
-    	 System.out.println("erreur de chargement de la BDD");
-      }
-		}
-}
+                conn = DriverManager.getConnection(url, user, passwd);
+                System.out.println("Connexion effective !");
 
 
-	//Classe de mono connection
-    public static Connection connexionBD(){
-    	if(conn == null){
-    		new Connect();
-    	}
-    	return conn;
+            } catch (Exception e) {
+                System.out.println("erreur de chargement de la BDD");
+            }
+        }
     }
 
 
-
-    public void Deconnexion(){
-    	try{
-    		conn.close();
-    	}catch(Exception e){
-    		System.out.println("Deconnexion Impossible");
-    	}
+    /**
+     *
+     * @return conn (connection BDD) Vérification du patern de connection
+     */
+    public static Connection connexionBD() {
+        if (conn == null) {
+            new Connect();
+        }
+        return conn;
     }
 
+    /**
+     * Deconnection base de données
+     */
+    public void Deconnexion() {
+        try {
+            conn.close();
+        } catch (Exception e) {
+            System.out.println("Deconnexion Impossible");
+        }
+    }
 
 
 }
