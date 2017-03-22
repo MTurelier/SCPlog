@@ -16,7 +16,9 @@ import scp.log.view.NewUserController;
  * Main App
  */
 public class MainApp extends Application {
-
+    /**
+     * Déclaration de la variable primary Stage
+     */
     private Stage primaryStage;
 
     /**
@@ -88,7 +90,7 @@ public class MainApp extends Application {
 
     /**
      *
-     * @return primaryStage
+     * @return primaryStage Renvoi la première fenêtre du software
      */
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -96,7 +98,7 @@ public class MainApp extends Application {
 
     /**
      *
-     * @param args
+     * @param args Classe Main
      */
     public static void main(String[] args) {
         launch(args);
