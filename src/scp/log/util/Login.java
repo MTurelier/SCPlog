@@ -37,8 +37,7 @@ public class Login {
             }
             if (resultat.next()) {
                 String motDePasse = resultat.getString(1);
-                if (motDePasse.equals(pass)) return true;
-                else return false;
+                return motDePasse.equals(pass);
             } else {
                 return false;
             }

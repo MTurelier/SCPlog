@@ -24,40 +24,15 @@ public class LoginController {
     public PasswordField Pwordfield;
     private Stage loginStage;
     private boolean okClicked = false;
-    private MainApp mainApp;
     @FXML
     public Button ok;
-
-    /**
-     * Initialisation Login
-     */
-    @FXML
-    private void initialize() {
-
-    }
-
-    /**
-     *
-     * @param loginStage - Fenetre de Login
-     */
-    public void setloginStage(Stage loginStage) {
-        this.loginStage = loginStage;
-    }
-
-    /**
-     *
-     * @return OkClicked (appelé par la suite)
-     */
-    public boolean isOkClicked() {
-        return okClicked;
-    }
 
     /**
      *
      * @param mainApp Appelle Classe MainApp
      */
     public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+        MainApp mainApp1 = mainApp;
     }
 
     /**
@@ -78,7 +53,8 @@ public class LoginController {
         pass = Pwordfield.getText();
         Login log = new Login();
         if (log.Login(login, pass)) {
-            boolean okClicked = mainApp.showNUser();
+            MainApp mainApp = new MainApp();
+            mainApp.showNUser();
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(loginStage);
@@ -100,7 +76,7 @@ public class LoginController {
         pass = Pwordfield.getText();
         Login log = new Login();
         SetUser setUser = new SetUser();
-        if (log.Login(login, pass) == true) {
+        if (log.Login(login, pass)) {
 
             setUser.setUser(login);
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -120,5 +96,9 @@ public class LoginController {
             alert.showAndWait();
 
         }
+    }
+
+    public void setLoginStage(Stage loginStage) {
+        this.loginStage = loginStage;
     }
 }
