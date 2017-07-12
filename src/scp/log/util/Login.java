@@ -13,7 +13,6 @@ public class Login {
 
 
     Connection conn;
-    private Statement statement = null;
     private ResultSet resultat;
 
     /**
@@ -28,7 +27,7 @@ public class Login {
         try {
             try {
 
-                statement = Connect.connexionBD().createStatement();
+                Statement statement = Connect.connexionBD().createStatement();
                 Connect.connexionBD();
                 String sql = "SELECT password FROM user WHERE login ='" + login + "'";
                 resultat = statement.executeQuery(sql);

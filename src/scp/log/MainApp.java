@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import scp.log.view.LoginController;
 import scp.log.view.NewUserController;
+import scp.log.view.WelcomePageController;
 
 @SuppressWarnings("ALL")
 /**
@@ -20,7 +21,7 @@ public class MainApp extends Application {
      * Déclaration de la variable primary Stage
      */
     private Stage primaryStage;
-
+    private Stage mainPage;
     /**
      * Initialisation première fenêtre
      * @param primaryStage
@@ -49,11 +50,13 @@ public class MainApp extends Application {
             primaryStage.show();
             LoginController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setLoginStage(primaryStage);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      *

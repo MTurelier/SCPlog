@@ -11,9 +11,8 @@ public class SetUser {
 
 
     Connection conn;
-    private Statement statement = null;
     private ResultSet resultat;
-    User user = new User();
+    private User user = new User();
 
     /**
      * Classe de sauvegarde de l'utilisateur
@@ -24,7 +23,7 @@ public class SetUser {
 
         try {
 
-            statement = Connect.connexionBD().createStatement();
+            Statement statement = Connect.connexionBD().createStatement();
             Connect.connexionBD();
             String query = "SELECT * FROM user WHERE login ='" + login + "';";
             ResultSet result = statement.executeQuery(query);

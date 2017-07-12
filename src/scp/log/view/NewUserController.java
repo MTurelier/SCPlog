@@ -23,7 +23,6 @@ public class NewUserController {
     private ObservableList<String> statusList = FXCollections.observableArrayList("Direction", "Admin", "Employ�");
 
     Connection conn;
-    private Statement statement = null;
 
     @FXML
     private Stage NewUserStage;
@@ -152,7 +151,7 @@ public class NewUserController {
             }
             Connect.connexionBD();
             try {
-                statement = Connect.connexionBD().createStatement();
+                Statement statement = Connect.connexionBD().createStatement();
                 Connect.connexionBD();
                 String sql = "INSERT INTO user SET nom='" + nom + "',prenom='" + prenom + "',login='" + login + "',password='" + pass + "',societe=" + comp + ",statut=" + stat + ";";
                 statement.executeUpdate(sql);
